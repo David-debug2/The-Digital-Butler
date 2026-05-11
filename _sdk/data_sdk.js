@@ -6,21 +6,21 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 1.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 12:00 PM',
         content: 'Hello! Welcome to my design portfolio. I\'m David, a UI/UX designer and frontend developer with a passion for creating beautiful, functional digital experiences.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 2.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 12:01 PM',
         content: 'This portfolio is styled like Discord for a fun, interactive experience. Browse through the channels on the left to see my work, process, and how to get in touch.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 3.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 12:02 PM',
         content: 'Feel free to explore! If you have any questions, check out the #about-me or #socials channels.',
         embed: null
@@ -33,14 +33,14 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 4.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Yesterday at 3:45 PM',
         content: 'Here are some of my featured projects. Click on the embeds below to see more details.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 5.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Yesterday at 3:46 PM',
         content: '',
         embed: {
@@ -52,7 +52,7 @@ const channelContent = {
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 6.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Yesterday at 3:47 PM',
         content: '',
         embed: {
@@ -64,7 +64,7 @@ const channelContent = {
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 7.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Yesterday at 3:48 PM',
         content: '',
         embed: {
@@ -82,14 +82,14 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 8.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '2 days ago at 10:30 AM',
         content: 'Dive deep into my design process with these case studies.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 9.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '2 days ago at 10:31 AM',
         content: '',
         embed: {
@@ -101,7 +101,7 @@ const channelContent = {
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 10.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '2 days ago at 10:32 AM',
         content: '',
         embed: {
@@ -119,14 +119,14 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 11.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '3 days ago at 2:15 PM',
         content: 'Here\'s my pricing structure for design commissions.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 12.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '3 days ago at 2:16 PM',
         content: '',
         embed: {
@@ -138,7 +138,7 @@ const channelContent = {
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 13.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '3 days ago at 2:17 PM',
         content: '',
         embed: {
@@ -150,7 +150,7 @@ const channelContent = {
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 14.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '3 days ago at 2:18 PM',
         content: '',
         embed: {
@@ -168,21 +168,21 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 15.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '4 days ago at 9:00 AM',
         content: 'My design process is collaborative and iterative.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 16.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '4 days ago at 9:01 AM',
         content: '1. Discovery & Research\n2. Wireframing & Prototyping\n3. Design & Feedback\n4. Final Delivery',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 18.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '4 days ago at 9:02 AM',
         content: 'I typically deliver within 2-4 weeks depending on the project scope.',
         embed: null
@@ -195,21 +195,21 @@ const channelContent = {
     messages: [
       {
         author: 'Client A',
-        avatar: 'assets\avatar 23.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '1 week ago at 11:45 AM',
         content: '"David delivered exceptional work on time and exceeded our expectations. Highly recommend!"',
         embed: null
       },
       {
         author: 'Client B',
-        avatar: 'assets\avatar 24.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '2 weeks ago at 4:20 PM',
         content: '"Great communication and creative solutions. Will work with again."',
         embed: null
       },
       {
         author: 'Client C',
-        avatar: 'assets\avatar 25.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: '3 weeks ago at 1:30 PM',
         content: '"Professional, talented, and easy to work with. 5 stars!"',
         embed: null
@@ -222,21 +222,21 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 17.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 8:00 AM',
         content: 'Hi! I\'m David, a freelance designer based in [Your Location]. I specialize in UI/UX design, branding, and frontend development.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 19.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 8:01 AM',
         content: 'With 5+ years of experience, I\'ve worked with startups and established companies to create digital products that users love.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 20.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 8:02 AM',
         content: 'When I\'m not designing, you can find me exploring new tech, hiking, or contributing to open-source projects.',
         embed: null
@@ -249,21 +249,21 @@ const channelContent = {
     messages: [
       {
         author: 'David',
-        avatar: 'assets\avatar 21.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 7:00 AM',
         content: 'Connect with me on social media and professional platforms.',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 22.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 7:01 AM',
         content: '• Twitter: @yourhandle\n• LinkedIn: linkedin.com/in/yourprofile\n• Dribbble: dribbble.com/yourusername\n• Email: hello@yourdomain.com',
         embed: null
       },
       {
         author: 'David',
-        avatar: 'assets\avatar 22.png',
+        avatar: 'assets/avatar 1.png',
         timestamp: 'Today at 7:02 AM',
         content: 'Feel free to reach out for collaborations or just to say hi!',
         embed: null
