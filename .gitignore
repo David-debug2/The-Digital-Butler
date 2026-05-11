@@ -1,0 +1,16 @@
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# Dependency directories
+/node_modules/
+
+# Build outputs
+/dist/
+/build/
+
+# Temporary files
+*.tmp
+*.swp
