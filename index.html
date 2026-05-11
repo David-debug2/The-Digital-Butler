@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Portfolio</title>
+  <meta name="description" content="Portfolio of a UI/UX designer and frontend developer, featuring projects, case studies, and commission info in a Discord-inspired interface.">
+  <meta name="keywords" content="portfolio, design, UI/UX, frontend, branding, motion design, illustration">
+  <meta property="og:title" content="Discord Portfolio">
+  <meta property="og:description" content="Explore my design work in a unique Discord-style interface.">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630/5865F2/FFFFFF?text=Portfolio+Preview">
+  <meta property="og:url" content="https://yourusername.github.io/my-portfolio">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    html, body { height: 100%; margin: 0; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #2f3136; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: #202225; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #18191c; }
+
+    .server-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      transition: border-radius 0.2s, background-color 0.2s;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .server-icon:hover, .server-icon.active {
+      border-radius: 16px;
+    }
+    .server-icon::before {
+      content: '';
+      position: absolute;
+      left: -16px;
+      width: 4px;
+      height: 0;
+      background: #fff;
+      border-radius: 0 4px 4px 0;
+      transition: height 0.2s;
+    }
+    .server-icon:hover::before { height: 20px; }
+    .server-icon.active::before { height: 40px; }
+
+    .channel-item {
+      padding: 6px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.1s, color 0.1s;
+      color: #8e9297;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .channel-item:hover { background: #34373c; color: #dcddde; }
+    .channel-item.active { background: #393c43; color: #fff; }
+
+    .embed-card {
+      border-left: 4px solid #5865F2;
+      background: #2f3136;
+      border-radius: 4px;
+      padding: 16px;
+      max-width: 520px;
+    }
+
+    .discord-btn {
+      padding: 8px 16px;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.17s, transform 0.1s;
+      border: none;
+    }
+    .discord-btn:active { transform: translateY(1px); }
+    .discord-btn-primary { background: #5865F2; color: #fff; }
+    .discord-btn-primary:hover { background: #4752c4; }
+    .discord-btn-secondary { background: #4f545c; color: #fff; }
+    .discord-btn-secondary:hover { background: #686d73; }
+
+    .category-header {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: #8e9297;
+      padding: 18px 8px 4px;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 2px;
+      user-select: none;
+    }
+    .category-header:hover { color: #dcddde; }
+
+    .message-group {
+      padding: 4px 16px;
+      margin: 8px 0;
+    }
+    .message-group:hover { background: #32353b; }
+
+    .typing-indicator span {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: #72767d;
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+      margin-right: 2px;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .tooltip {
+      position: absolute;
+      left: 60px;
+      background: #18191c;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.1s, transform 0.1s;
+      z-index: 100;
+    }
+    .server-icon:hover .tooltip {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'discord-dark': '#202225',
+            'discord-bg': '#36393f',
+            'discord-sidebar': '#2f3136',
+            'discord-accent': '#5865F2',
+            'discord-green': '#3ba55d',
+            'discord-text': '#dcddde',
+            'discord-muted': '#8e9297',
+            'discord-hover': '#32353b',
+          }
+        }
+      }
+    }
+  </script>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="_sdk/data_sdk.js" type="text/javascript"></script>
+  <script>
+    // Portfolio functions - define early so onclick handlers work
+    let currentChannel = 'welcome';
+
+    window.switchServer = function(serverId) {
+      document.querySelectorAll('.server-icon').forEach(el => el.classList.remove('active'));
+      const icon = document.querySelector(`[data-server="${serverId}"]`);
+      if (icon) icon.classList.add('active');
+    };
+
+    window.switchChannel = function(el, channelId) {
+      document.querySelectorAll('.channel-item').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      currentChannel = channelId;
+      renderContent(channelId);
+    };
+
+    window.toggleCategory = function(header) {
+      const channels = header.nextElementSibling;
+      const chevron = header.querySelector('i');
+      if (channels.style.display === 'none') {
+        channels.style.display = 'block';
+        chevron.style.transform = '';
+      } else {
+        channels.style.display = 'none';
+        chevron.style.transform = 'rotate(-90deg)';
+      }
+    };
+
+    window.renderContent = function(channelId) {
+      const data = window.portfolioData[channelId];
+      if (!data) {
+        console.error('No data found for channel:', channelId);
+        return;
+      }
+
+      document.getElementById('channel-title').textContent = data.title;
+      document.getElementById('channel-desc').textContent = data.desc;
+      document.getElementById('input-placeholder').textContent = `Message #${data.title}`;
+
+      const area = document.getElementById('content-area');
+      area.innerHTML = `
+        <div class="mb-6 pb-4 border-b border-[#40444b]">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-10 h-10 rounded-full bg-discord-accent flex items-center justify-center text-white font-bold">
+              ${data.messages[0]?.author.charAt(0) || 'D'}
+            </div>
+            <div>
+              <span class="text-white font-semibold">${data.messages[0]?.author || 'David'}</span>
+              <span class="text-discord-muted text-sm ml-2">${data.messages[0]?.timestamp || 'Today'}</span>
+            </div>
+          </div>
+          <p class="text-discord-text">${data.desc}</p>
+        </div>
+        ${data.messages.map(msg => `
+        <div class="message-group">
+          <div class="flex items-start gap-4">
+            <img src="${msg.avatar}" alt="${msg.author} avatar" class="w-10 h-10 rounded-full">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-white font-semibold">${msg.author}</span>
+                <span class="text-discord-muted text-xs">${msg.timestamp}</span>
+              </div>
+              ${msg.content ? `<p class="text-discord-text mb-2">${msg.content.replace(/\n/g, '<br>')}</p>` : ''}
+              ${msg.embed ? `
+                <div class="embed-card">
+                  <div class="flex gap-4">
+                    <div class="flex-1">
+                      <h4 class="text-white font-semibold mb-1">${msg.embed.title}</h4>
+                      <p class="text-discord-muted text-sm">${msg.embed.description}</p>
+                    </div>
+                    ${msg.embed.image ? `<img src="${msg.embed.image}" alt="${msg.embed.title}" class="w-20 h-20 rounded object-cover">` : ''}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+      `;
+      lucide.createIcons();
+    };
+
+    window.applyConfig = function(config) {
+      document.getElementById('user-display-name').textContent = config.display_name || defaultConfig.display_name;
+      document.getElementById('user-handle').textContent = config.discord_handle || defaultConfig.discord_handle;
+      document.getElementById('status-text').textContent = config.status_text || defaultConfig.status_text;
+
+      const font = config.font_family || defaultConfig.font_family;
+      document.body.style.fontFamily = `${font}, Inter, sans-serif`;
+
+      document.documentElement.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
+      document.documentElement.style.setProperty('--accent', config.accent_color || defaultConfig.accent_color);
+    };
+
+    // Initialize portfolio when DOM is ready
+    function initPortfolio() {
+      if (window.portfolioData) {
+        renderContent('welcome');
+        applyConfig(defaultConfig);
+        lucide.createIcons();
+      } else {
+        console.error('portfolioData not available');
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPortfolio);
+    } else {
+      setTimeout(initPortfolio, 100);
+    }
+  </script>
+ </head>
+ <body class="h-full bg-discord-bg overflow-hidden">
+  <div id="app" class="flex h-full w-full">
+   <!-- Far-Left Server Sidebar -->
+   <nav class="w-[72px] bg-discord-dark flex flex-col items-center py-3 gap-2 overflow-y-auto flex-shrink-0" aria-label="Server navigation">
+    <!-- Home -->
+    <div class="server-icon active bg-discord-accent text-white" data-server="home" onclick="switchServer('home')" role="button" tabindex="0" aria-label="Portfolio Home">
+     <svg width="28" height="20" viewbox="0 0 28 20"><path fill="currentColor" d="M23.7 1.7A23 23 0 0018 0a.1.1 0 00-.1 0 16 16 0 00-.7 1.5 21 21 0 00-6.4 0A14 14 0 0010 0H10a23 23 0 00-5.7 1.7A24 24 0 00.2 17.7a23 23 0 007 3.5.1.1 0 00.1 0 16 16 0 001.4-2.3.1.1 0 000-.1 15 15 0 01-2.2-1.1.1.1 0 010-.1 12 12 0 00.4-.3.1.1 0 01.1 0 16.5 16.5 0 0014 0h.1l.4.4a.1.1 0 010 .1 15 15 0 01-2.2 1 .1.1 0 000 .2 18 18 0 001.4 2.2h.1a23 23 0 007-3.5 24 24 0 00-4-16z" />
+     </svg><span class="tooltip">Portfolio Home</span>
+    </div>
+    <div class="w-8 h-[2px] bg-discord-bg rounded-full my-1"></div><!-- Skill Servers -->
+    <div class="server-icon bg-discord-sidebar text-discord-muted hover:bg-discord-accent hover:text-white" data-server="uiux" onclick="switchServer('uiux')" role="button" tabindex="0" aria-label="UI/UX Design">
+     <span class="text-lg font-bold">UI</span> <span class="tooltip">UI/UX Design</span>
+    </div>
+    <div class="server-icon bg-discord-sidebar text-discord-muted hover:bg-discord-accent hover:text-white" data-server="frontend" onclick="switchServer('frontend')" role="button" tabindex="0" aria-label="Frontend Development">
+     <i data-lucide="code-2" style="width:22px;height:22px"></i> <span class="tooltip">Frontend Dev</span>
+    </div>
+    <div class="server-icon bg-discord-sidebar text-discord-muted hover:bg-discord-accent hover:text-white" data-server="branding" onclick="switchServer('branding')" role="button" tabindex="0" aria-label="Branding">
+     <i data-lucide="palette" style="width:22px;height:22px"></i> <span class="tooltip">Branding</span>
+    </div>
+    <div class="server-icon bg-discord-sidebar text-discord-muted hover:bg-discord-accent hover:text-white" data-server="motion" onclick="switchServer('motion')" role="button" tabindex="0" aria-label="Motion Design">
+     <i data-lucide="film" style="width:22px;height:22px"></i> <span class="tooltip">Motion Design</span>
+    </div>
+    <div class="server-icon bg-discord-sidebar text-discord-muted hover:bg-discord-accent hover:text-white" data-server="illustration" onclick="switchServer('illustration')" role="button" tabindex="0" aria-label="Illustration">
+     <i data-lucide="pen-tool" style="width:22px;height:22px"></i> <span class="tooltip">Illustration</span>
+    </div>
+    <div class="w-8 h-[2px] bg-discord-bg rounded-full my-1"></div>
+    <div class="server-icon bg-discord-sidebar text-[#3ba55d] hover:bg-[#3ba55d] hover:text-white" onclick="switchServer('home')" role="button" tabindex="0" aria-label="Add a Server">
+     <i data-lucide="plus" style="width:22px;height:22px"></i> <span class="tooltip">Add a Server</span>
+    </div>
+   </nav><!-- Navigation Sidebar -->
+   <aside class="w-[240px] bg-discord-sidebar flex flex-col flex-shrink-0" aria-label="Channel navigation">
+    <!-- Server Header -->
+    <header class="h-12 px-4 flex items-center border-b border-[#202225] shadow-sm cursor-pointer hover:bg-[#34373c]">
+     <h1 id="server-title" class="text-white font-semibold text-[15px] truncate">Design Portfolio</h1><i data-lucide="chevron-down" style="width:16px;height:16px;margin-left:auto" class="text-discord-muted"></i>
+    </header><!-- Channels -->
+    <nav class="flex-1 overflow-y-auto px-2 pt-3" id="channels-list" aria-label="Channels">
+     <!-- Category: Recent Work -->
+     <div class="category-header" onclick="toggleCategory(this)">
+      <i data-lucide="chevron-down" style="width:10px;height:10px"></i> <span>Recent Work</span>
+     </div>
+     <div class="category-channels">
+      <div class="channel-item active" onclick="switchChannel(this, 'welcome')" data-channel="welcome">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>welcome</span>
+      </div>
+      <div class="channel-item" onclick="switchChannel(this, 'featured-projects')" data-channel="featured-projects">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>featured-projects</span>
+      </div>
+      <div class="channel-item" onclick="switchChannel(this, 'case-studies')" data-channel="case-studies">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>case-studies</span>
+      </div>
+     </div><!-- Category: Commission Info -->
+     <div class="category-header" onclick="toggleCategory(this)">
+      <i data-lucide="chevron-down" style="width:10px;height:10px"></i> <span>Commission Info</span>
+     </div>
+     <div class="category-channels">
+      <div class="channel-item" onclick="switchChannel(this, 'pricing')" data-channel="pricing">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>pricing</span>
+      </div>
+      <div class="channel-item" onclick="switchChannel(this, 'process')" data-channel="process">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>my-process</span>
+      </div>
+      <div class="channel-item" onclick="switchChannel(this, 'testimonials')" data-channel="testimonials">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>testimonials</span>
+      </div>
+     </div><!-- Category: Contact Me -->
+     <div class="category-header" onclick="toggleCategory(this)">
+      <i data-lucide="chevron-down" style="width:10px;height:10px"></i> <span>Contact Me</span>
+     </div>
+     <div class="category-channels">
+      <div class="channel-item" onclick="switchChannel(this, 'about-me')" data-channel="about-me">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>about-me</span>
+      </div>
+      <div class="channel-item" onclick="switchChannel(this, 'socials')" data-channel="socials">
+       <i data-lucide="hash" style="width:18px;height:18px;opacity:0.5"></i> <span>socials</span>
+      </div>
+     </div>
+    </nav><!-- User Profile Panel -->
+    <footer class="h-[52px] bg-[#292b2f] px-2 flex items-center gap-2 flex-shrink-0" aria-label="User profile">
+     <div class="relative">
+      <div class="w-8 h-8 rounded-full bg-discord-accent flex items-center justify-center text-white text-sm font-bold">
+       D
+      </div>
+      <div class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-discord-green rounded-full border-[2.5px] border-[#292b2f]"></div>
+     </div>
+     <div class="flex-1 min-w-0">
+      <p id="user-display-name" class="text-white text-sm font-medium leading-tight truncate">Designer</p>
+      <p id="user-handle" class="text-discord-muted text-[11px] leading-tight truncate">@designer</p>
+     </div>
+     <div class="flex gap-1">
+      <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-[#3a3c41] text-discord-muted"> <i data-lucide="mic" style="width:16px;height:16px"></i> </button> <button class="w-8 h-8 flex items-center justify-center rounded hover:bg-[#3a3c41] text-discord-muted"> <i data-lucide="settings" style="width:16px;height:16px"></i> </button>
+     </div>
+    </footer>
+   </aside><!-- Main Content Area -->
+   <main class="flex-1 flex flex-col min-w-0" aria-label="Main content">
+    <!-- Channel Header -->
+    <header class="h-12 px-4 flex items-center border-b border-[#202225] shadow-sm flex-shrink-0 gap-2">
+     <i data-lucide="hash" style="width:20px;height:20px" class="text-discord-muted flex-shrink-0"></i>
+     <h2 id="channel-title" class="text-white font-semibold text-base">welcome</h2>
+     <div class="w-px h-6 bg-[#4f545c] mx-2"></div>
+     <p id="channel-desc" class="text-discord-muted text-sm truncate">Welcome to my design portfolio!</p>
+     <div class="ml-auto flex items-center gap-3 text-discord-muted flex-shrink-0">
+      <i data-lucide="bell" style="width:20px;height:20px" class="cursor-pointer hover:text-discord-text"></i> <i data-lucide="pin" style="width:20px;height:20px" class="cursor-pointer hover:text-discord-text"></i> <i data-lucide="users" style="width:20px;height:20px" class="cursor-pointer hover:text-discord-text"></i>
+      <div class="relative">
+       <input type="text" placeholder="Search" class="w-36 h-7 bg-[#202225] rounded text-sm text-discord-text px-2 placeholder-discord-muted outline-none focus:w-56 transition-all"> <i data-lucide="search" style="width:14px;height:14px;position:absolute;right:6px;top:6px" class="text-discord-muted pointer-events-none"></i>
+      </div>
+     </div>
+    </header><!-- Messages / Content Area -->
+    <section class="flex-1 overflow-y-auto px-4 py-4" id="content-area" aria-label="Channel messages">
+     <!-- Content loaded by JS -->
+    </section><!-- Message Input (decorative) -->
+    <footer class="px-4 pb-4 flex-shrink-0">
+     <div class="bg-[#40444b] rounded-lg flex items-center px-4 py-2.5">
+      <i data-lucide="plus-circle" style="width:22px;height:22px" class="text-discord-muted cursor-pointer hover:text-discord-text mr-3"></i> <span id="input-placeholder" class="text-discord-muted text-sm flex-1">Message #welcome</span>
+      <div class="flex gap-2 text-discord-muted ml-3">
+       <i data-lucide="gift" style="width:22px;height:22px" class="cursor-pointer hover:text-discord-text"></i> <i data-lucide="smile" style="width:22px;height:22px" class="cursor-pointer hover:text-discord-text"></i>
+      </div>
+     </div>
+     <div class="typing-indicator mt-1.5 h-4 flex items-center">
+      <span></span><span></span><span></span> <span id="status-text" class="text-discord-muted text-xs ml-2">Available for commissions</span>
+     </div>
+    </footer>
+   </main>
+  </div>
+  <script>
+
+    // Element SDK
+    const defaultConfig = {
+      display_name: 'Designer',
+      discord_handle: '@designer',
+      status_text: 'Available for commissions',
+      background_color: '#36393f',
+      sidebar_color: '#2f3136',
+      accent_color: '#5865F2',
+      text_color: '#dcddde',
+      dark_color: '#202225',
+      font_family: 'Inter',
+      font_size: 14
+    };
+
+    function applyConfig(config) {
+      document.getElementById('user-display-name').textContent = config.display_name || defaultConfig.display_name;
+      document.getElementById('user-handle').textContent = config.discord_handle || defaultConfig.discord_handle;
+      document.getElementById('status-text').textContent = config.status_text || defaultConfig.status_text;
+
+      const font = config.font_family || defaultConfig.font_family;
+      document.body.style.fontFamily = `${font}, Inter, sans-serif`;
+
+      // Colors
+      document.documentElement.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
+      document.documentElement.style.setProperty('--accent', config.accent_color || defaultConfig.accent_color);
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.sidebar_color || defaultConfig.sidebar_color, set: (v) => { config.sidebar_color = v; window.elementSdk.setConfig({ sidebar_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+          { get: () => config.dark_color || defaultConfig.dark_color, set: (v) => { config.dark_color = v; window.elementSdk.setConfig({ dark_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['display_name', config.display_name || defaultConfig.display_name],
+        ['discord_handle', config.discord_handle || defaultConfig.discord_handle],
+        ['status_text', config.status_text || defaultConfig.status_text]
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fa0856b25780959',t:'MTc3ODQ5NTU2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
